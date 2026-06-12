@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học cùng Minh đẹp trai</title>
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 640 512%22><path fill=%22%23f05123%22 d=%22M392.8 1.2c-17-4.9-34.7 5-39.6 22l-128 448c-4.9 17 5 34.7 22 39.6s34.7-5 39.6-22l128-448c4.9-17-5-34.7-22-39.6zm80.6 120.1c-12.5 12.5-12.5 32.8 0 45.3L562.7 256l-89.4 89.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l112-112c12.5-12.5 12.5-32.8 0-45.3l-112-112c-12.5-12.5-32.8-12.5-45.3 0zm-306.7 0c-12.5-12.5-32.8-12.5-45.3 0l-112 112c-12.5 12.5-12.5 32.8 0 45.3l112 112c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l89.4-89.4c12.5-12.5 12.5-32.8 0-45.3z%22/></svg>"
+        type="image/svg+xml">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- CodeMirror CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-left" style="display: flex; align-items: center; gap: 16px;">
+                <button id="mobileMenuBtn" class="mobile-menu-btn" style="display: none; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+                <div class="logo">
+                    <i class="fa-solid fa-code"></i>
+                    <span>Hoc cung minhdepzai</span>
+                </div>
+            </div>
+            <div class="course-selector">
+                <select id="courseSelect">
+                    <option value="js-basic">JavaScript Cơ Bản</option>
+                    <option value="js-advanced">JavaScript Nâng Cao</option>
+                    <option value="nodejs">Node.js Cơ Bản</option>
+                </select>
+            </div>
+            <div class="user-profile">
+                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>" alt="Default Avatar">
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <div id="sidebarOverlay" class="sidebar-overlay"></div>
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-header">
+                    <h3>Nội dung khóa học</h3>
+                </div>
+                <div class="lesson-list" id="lessonList">
+                    <!-- Lessons will be dynamically populated here -->
+                </div>
+            </aside>
+
+            <!-- Main Content Area -->
+            <main class="content-area">
+                <div class="lesson-header">
+                    <h1 id="lessonTitle">Chào mừng bạn đến với khóa học</h1>
+                </div>
+
+                <!-- Theory/Video Section -->
+                <div class="theory-section" id="theorySection">
+                    <div id="lessonContent">
+                        <p>Chọn một bài học ở menu bên trái để bắt đầu.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Section: Code Editor or Quiz -->
+                <div class="interactive-section" id="interactiveSection" style="display: none;">
+                    <!-- Code Editor Mode -->
+                    <div id="editorMode" style="display: none;">
+                        <div class="editor-toolbar">
+                            <span><i class="fa-brands fa-js"></i> JavaScript</span>
+                            <div class="toolbar-actions">
+                                <button id="hintCodeBtn" class="btn btn-secondary"><i class="fa-solid fa-lightbulb"></i> Gợi ý</button>
+                                <button id="runCodeBtn" class="btn btn-primary"><i class="fa-solid fa-play"></i> Chạy Code</button>
+                            </div>
+                        </div>
+                        <div class="editor-container">
+                            <textarea id="codeEditor"></textarea>
+                        </div>
+                        <div class="console-container">
+                            <div class="console-header">Console Output</div>
+                            <div id="consoleOutput" class="console-output"></div>
+                        </div>
+                    </div>
+
+                    <!-- Quiz Mode -->
+                    <div id="quizMode" style="display: none;">
+                        <div class="quiz-container">
+                            <div id="quizListContainer">
+                                <!-- Dynamic questions will be rendered here -->
+                            </div>
+                            <div id="quizResult" class="quiz-result mt-3" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- CodeMirror JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+
+    <!-- Custom Scripts -->
+    <script src="editor.js"></script>
+    <script src="quiz.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

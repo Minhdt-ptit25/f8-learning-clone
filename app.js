@@ -86,7 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function loadCourse(courseId) {
         try {
-            const response = await fetch(`http://localhost:3000/api/courses/${courseId}`);
+            const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+                ? 'http://localhost:3000'
+                : 'https://f8-learning-clone.onrender.com';
+            const response = await fetch(`${API_URL}/api/courses/${courseId}`);
             if (!response.ok) throw new Error('Course fetch failed');
             currentCourseData = await response.json();
         } catch (error) {

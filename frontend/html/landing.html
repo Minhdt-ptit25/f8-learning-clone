@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Học cùng Minh đẹp trai - Khởi đầu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+    <style>
+        body { margin: 0; overflow: hidden; background-color: #030712; }
+        .landing-page { position: relative; height: 100vh; display: flex; justify-content: center; align-items: center; }
+    </style>
+</head>
+<body>
+    <div id="landingPage" class="landing-page">
+        <div class="landing-shapes">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+        <div class="landing-content">
+            <h1 class="landing-title">Học Cùng Minh Đẹp Trai</h1>
+            <p class="landing-subtitle">Nền tảng tự học trực tuyến. Nâng cao trình độ "học lén", cày cuốc thâu đêm trở thành trùm Backend.</p>
+            <div class="landing-actions">
+                <button id="landingLoginBtn" class="btn btn-primary landing-btn" onclick="window.location.href='login.html?mode=login'">Đăng nhập ngay</button>
+                <button id="landingRegisterBtn" class="btn btn-secondary landing-btn outline" onclick="window.location.href='login.html?mode=register'">Đăng ký tài khoản</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Nếu đã đăng nhập thì đá về trang chủ
+        if (localStorage.getItem('f8_token')) {
+            window.location.href = '../index.html';
+        }
+    </script>
+</body>
+</html>

@@ -16,11 +16,20 @@
     <!-- CodeMirror CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/theme/dracula.min.css">
+    <!-- Highlight.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/base16/dracula.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
+    <script>
+        // Check authentication immediately
+        if (!localStorage.getItem('f8_token')) {
+            window.location.href = 'html/landing.html';
+        }
+    </script>
+
     <div class="app-container">
         <!-- Header -->
         <header class="header">
@@ -41,7 +50,15 @@
                 </select>
             </div>
             <div class="user-profile">
-                <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%239ca3af'><path d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z'/></svg>" alt="Default Avatar">
+                <!-- Hiển thị khi chưa đăng nhập -->
+                <div id="unauthView">
+                    <button id="showLoginBtn" class="btn btn-primary" style="padding: 6px 12px; font-size: 14px;">Đăng nhập</button>
+                </div>
+                <!-- Hiển thị khi đã đăng nhập -->
+                <div id="authView" style="display: none; align-items: center; gap: 10px;">
+                    <span id="userNameDisplay" style="font-weight: 600; font-size: 14px; color: #fff;"></span>
+                    <button id="logoutBtn" class="btn btn-secondary" style="padding: 6px 12px; font-size: 14px;"><i class="fa-solid fa-right-from-bracket"></i></button>
+                </div>
             </div>
         </header>
 
@@ -107,11 +124,20 @@
     <!-- CodeMirror JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.13/addon/edit/closebrackets.min.js"></script>
+
+    <!-- Highlight.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+    <!-- Firebase SDK v9 (Modular via ESM or compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
 
     <!-- Custom Scripts -->
-    <script src="editor.js"></script>
-    <script src="quiz.js"></script>
-    <script src="app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/quiz.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

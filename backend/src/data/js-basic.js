@@ -564,10 +564,57 @@ const jsBasicData = {
                         <p>Với HTML DOM, JavaScript có thể truy cập và thay đổi tất cả các thành phần (element), thuộc tính (attribute), style (CSS) của một trang web.</p>
                         <p>Các phương thức get element phổ biến:</p>
                         <ul>
-                            <li><code>document.getElementById()</code></li>
-                            <li><code>document.querySelector()</code></li>
-                            <li><code>document.querySelectorAll()</code></li>
+                            <li><code>document.getElementById('id')</code>: Lấy element qua ID.</li>
+                            <li><code>document.querySelector('.class')</code>: Lấy element đầu tiên khớp với selector.</li>
+                            <li><code>document.querySelectorAll('div')</code>: Lấy tất cả các element khớp với selector.</li>
                         </ul>
+                    `
+                },
+                {
+                    id: 'js-basic-20-2',
+                    title: 'Thực hành: Get Element',
+                    type: 'code',
+                    content: '<p>Trong HTML có một thẻ h1 với id là <code>heading</code>. Hãy sử dụng <code>document.getElementById()</code> để lấy thẻ này và in ra console.</p>',
+                    initialCode: '// Lấy element có id là heading\nvar headingNode = \nconsole.log(headingNode);',
+                    solution: 'var headingNode = document.getElementById("heading");\nconsole.log(headingNode);'
+                },
+                {
+                    id: 'js-basic-20-3',
+                    title: 'DOM Attribute',
+                    type: 'theory',
+                    content: `
+                        <h2>DOM Attribute</h2>
+                        <p>JavaScript có thể dùng để thay đổi các thuộc tính (attribute) của các thẻ HTML (như href, src, title, class, id...)</p>
+                        <ul>
+                            <li><strong>Cách 1: Thao tác qua Property của Element node</strong>
+                                <pre><code>var aNode = document.querySelector('a');\naNode.href = "https://f8.edu.vn";</code></pre>
+                            </li>
+                            <li><strong>Cách 2: Sử dụng phương thức setAttribute</strong>
+                                <pre><code>var imgNode = document.querySelector('img');\nimgNode.setAttribute("src", "hinhanh.png");</code></pre>
+                            </li>
+                        </ul>
+                    `
+                },
+                {
+                    id: 'js-basic-20-4',
+                    title: 'Thực hành: DOM Attribute',
+                    type: 'code',
+                    content: '<p>Cho thẻ <code>&lt;a id="myLink"&gt;</code>. Hãy lấy element này và thêm thuộc tính <code>href</code> với giá trị <code>"https://fullstack.edu.vn/"</code>.</p>',
+                    initialCode: '// Lấy thẻ a\nvar linkNode = \n\n// Gán href\n',
+                    solution: 'var linkNode = document.getElementById("myLink");\nlinkNode.href = "https://fullstack.edu.vn/";'
+                },
+                {
+                    id: 'js-basic-20-5',
+                    title: 'DOM Text (innerText, textContent)',
+                    type: 'theory',
+                    content: `
+                        <h2>DOM Text</h2>
+                        <p>Để lấy hoặc thay đổi nội dung văn bản bên trong một thẻ HTML, chúng ta dùng <code>innerText</code> hoặc <code>textContent</code>.</p>
+                        <ul>
+                            <li><code>innerText</code>: Trả về nội dung giống với những gì bạn thấy trên trình duyệt (bị ảnh hưởng bởi CSS display:none).</li>
+                            <li><code>textContent</code>: Trả về toàn bộ nội dung text bên trong thẻ, bao gồm cả các khoảng trắng và text bị ẩn.</li>
+                        </ul>
+                        <pre><code>var heading = document.getElementById("title");\nheading.innerText = "Nội dung mới";</code></pre>
                     `
                 },
                 {

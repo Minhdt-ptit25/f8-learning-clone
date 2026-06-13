@@ -280,10 +280,57 @@ const coursesData = {
                             <p>Với HTML DOM, JavaScript có thể truy cập và thay đổi tất cả các thành phần (element), thuộc tính (attribute), style (CSS) của một trang web.</p>
                             <p>Các phương thức get element phổ biến:</p>
                             <ul>
-                                <li><code>document.getElementById()</code></li>
-                                <li><code>document.querySelector()</code></li>
-                                <li><code>document.querySelectorAll()</code></li>
+                                <li><code>document.getElementById('id')</code>: Lấy element qua ID.</li>
+                                <li><code>document.querySelector('.class')</code>: Lấy element đầu tiên khớp với selector.</li>
+                                <li><code>document.querySelectorAll('div')</code>: Lấy tất cả các element khớp với selector.</li>
                             </ul>
+                        `
+                    },
+                    {
+                        id: 'js-basic-20-2',
+                        title: 'Thực hành: Get Element',
+                        type: 'code',
+                        content: '<p>Trong HTML có một thẻ h1 với id là <code>heading</code>. Hãy sử dụng <code>document.getElementById()</code> để lấy thẻ này và in ra console.</p>',
+                        initialCode: '// Lấy element có id là heading\nvar headingNode = \nconsole.log(headingNode);',
+                        solution: 'var headingNode = document.getElementById("heading");\nconsole.log(headingNode);'
+                    },
+                    {
+                        id: 'js-basic-20-3',
+                        title: 'DOM Attribute',
+                        type: 'theory',
+                        content: `
+                            <h2>DOM Attribute</h2>
+                            <p>JavaScript có thể dùng để thay đổi các thuộc tính (attribute) của các thẻ HTML (như href, src, title, class, id...)</p>
+                            <ul>
+                                <li><strong>Cách 1: Thao tác qua Property của Element node</strong>
+                                    <pre><code>var aNode = document.querySelector('a');\naNode.href = "https://f8.edu.vn";</code></pre>
+                                </li>
+                                <li><strong>Cách 2: Sử dụng phương thức setAttribute</strong>
+                                    <pre><code>var imgNode = document.querySelector('img');\nimgNode.setAttribute("src", "hinhanh.png");</code></pre>
+                                </li>
+                            </ul>
+                        `
+                    },
+                    {
+                        id: 'js-basic-20-4',
+                        title: 'Thực hành: DOM Attribute',
+                        type: 'code',
+                        content: '<p>Cho thẻ <code>&lt;a id="myLink"&gt;</code>. Hãy lấy element này và thêm thuộc tính <code>href</code> với giá trị <code>"https://fullstack.edu.vn/"</code>.</p>',
+                        initialCode: '// Lấy thẻ a\nvar linkNode = \n\n// Gán href\n',
+                        solution: 'var linkNode = document.getElementById("myLink");\nlinkNode.href = "https://fullstack.edu.vn/";'
+                    },
+                    {
+                        id: 'js-basic-20-5',
+                        title: 'DOM Text (innerText, textContent)',
+                        type: 'theory',
+                        content: `
+                            <h2>DOM Text</h2>
+                            <p>Để lấy hoặc thay đổi nội dung văn bản bên trong một thẻ HTML, chúng ta dùng <code>innerText</code> hoặc <code>textContent</code>.</p>
+                            <ul>
+                                <li><code>innerText</code>: Trả về nội dung giống với những gì bạn thấy trên trình duyệt (bị ảnh hưởng bởi CSS display:none).</li>
+                                <li><code>textContent</code>: Trả về toàn bộ nội dung text bên trong thẻ, bao gồm cả các khoảng trắng và text bị ẩn.</li>
+                            </ul>
+                            <pre><code>var heading = document.getElementById("title");\nheading.innerText = "Nội dung mới";</code></pre>
                         `
                     },
                     {
@@ -495,7 +542,16 @@ const coursesData = {
                         content: `
                             <h2>Node.js là gì?</h2>
                             <p>Node.js là một môi trường runtime JavaScript đa nền tảng (cross-platform) và mã nguồn mở (open-source), dùng để chạy các ứng dụng JavaScript bên ngoài trình duyệt (máy chủ / backend).</p>
+                            <p>Node.js sử dụng kiến trúc non-blocking I/O và event-driven, làm cho nó nhẹ và cực kỳ hiệu quả đối với các ứng dụng dữ liệu thời gian thực (real-time data-intensive applications) chạy trên nhiều thiết bị phân tán.</p>
                         `
+                    },
+                    {
+                        id: 'node-1-2',
+                        title: 'Thực hành: Hello World trong Node.js',
+                        type: 'code',
+                        content: '<p>Bạn có thể chạy Javascript bên ngoài trình duyệt bằng Node.js. Hãy in ra console dòng chữ <code>"Hello Node.js"</code>.</p>',
+                        initialCode: '// Viết code in ra console\n',
+                        solution: 'console.log("Hello Node.js");'
                     },
                     {
                         id: 'node-2',
@@ -527,6 +583,8 @@ const coursesData = {
                             <h2>ExpressJS</h2>
                             <p>Express là một web framework cực kỳ phổ biến và linh hoạt dành cho Node.js, dùng để xây dựng các Web Server & API nhanh chóng.</p>
                             <pre><code>const express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('Hello World!');\n});\n\napp.listen(3000);</code></pre>
+                            <h3>Routing cơ bản</h3>
+                            <p>Routing quyết định cách ứng dụng phản hồi với một yêu cầu (request) của client tới một đường dẫn cụ thể (URI) và một phương thức HTTP cụ thể (GET, POST, v.v.).</p>
                         `
                     },
                     {
@@ -536,6 +594,22 @@ const coursesData = {
                         content: '<p><em>Lưu ý: Do Editor này chạy trên Browser nên không thể require Node.js modules thật.</em></p><p>Hãy viết hàm mô phỏng route trả về JSON. Viết code sao cho khi gọi hàm <code>sendUser()</code>, nó in ra console chuỗi <code>{"name": "NodeJS F8"}</code>.</p>',
                         initialCode: 'function sendUser() {\n    // Khai báo data\n    var user = {name: "NodeJS F8"};\n    \n    // Chuyển đổi sang chuỗi JSON và in ra console\n    \n}\n\nsendUser();',
                         solution: 'function sendUser() {\n    var user = {name: "NodeJS F8"};\n    console.log(JSON.stringify(user));\n}\n\nsendUser();'
+                    },
+                    {
+                        id: 'node-4-2',
+                        title: 'Trắc nghiệm: ExpressJS',
+                        type: 'quiz',
+                        content: '',
+                        quiz: {
+                            question: 'Trong ExpressJS, đối tượng "req" đại diện cho điều gì?',
+                            options: [
+                                { id: 'a', text: 'Phản hồi từ Server gửi về cho Client (Response)' },
+                                { id: 'b', text: 'Yêu cầu từ Client gửi lên Server (Request)' },
+                                { id: 'c', text: 'Module Require của Node.js' },
+                                { id: 'd', text: 'Khởi tạo Router' }
+                            ],
+                            correctAnswer: 'b'
+                        }
                     }
                 ]
             },
@@ -577,9 +651,9 @@ const coursesData = {
                             <h2>Mô hình MVC (Model - View - Controller)</h2>
                             <p>Là một kiến trúc phần mềm giúp tổ chức code rành mạch, dễ bảo trì:</p>
                             <ul>
-                                <li><strong>Model:</strong> Xử lý logic và tương tác với Database.</li>
-                                <li><strong>View:</strong> Đảm nhiệm phần giao diện (UI) hiển thị cho người dùng.</li>
-                                <li><strong>Controller:</strong> Tiếp nhận request, gọi Model lấy data và truyền xuống View.</li>
+                                <li><strong>Model:</strong> Xử lý logic và tương tác với Database. Xử lý các thao tác truy xuất dữ liệu.</li>
+                                <li><strong>View:</strong> Đảm nhiệm phần giao diện (UI) hiển thị cho người dùng. (Ví dụ Handlebars, EJS...)</li>
+                                <li><strong>Controller:</strong> Tiếp nhận request từ Client, gọi Model lấy/lưu data và truyền xuống View để render giao diện, hoặc trả về dạng JSON.</li>
                             </ul>
                         `
                     },
@@ -591,7 +665,16 @@ const coursesData = {
                             <h2>Middleware</h2>
                             <p>Middleware là những hàm được thực thi giữa quá trình nhận Request và trả về Response. Giống như một "trạm kiểm soát".</p>
                             <p>Thường dùng để: Xử lý body parser, kiểm tra phân quyền (Authentication), logging, v.v.</p>
+                            <pre><code>app.use((req, res, next) => {\n  console.log('Time:', Date.now());\n  next(); // Gọi hàm tiếp theo\n});</code></pre>
                         `
+                    },
+                    {
+                        id: 'node-8-2',
+                        title: 'Thực hành: Middleware mô phỏng',
+                        type: 'code',
+                        content: '<p>Hãy viết hàm <code>logger(req, next)</code> mô phỏng một Middleware. Hàm nhận vào chuỗi <code>req</code> và hàm callback <code>next</code>. Hãy in <code>req</code> ra console sau đó gọi hàm <code>next()</code>.</p>',
+                        initialCode: 'function logger(req, next) {\n    // In ra req\n    \n    // Gọi hàm next\n    \n}\n\nlogger("GET /users", function() {\n    console.log("Done");\n});',
+                        solution: 'function logger(req, next) {\n    console.log(req);\n    next();\n}\n\nlogger("GET /users", function() {\n    console.log("Done");\n});'
                     }
                 ]
             },
@@ -607,6 +690,12 @@ const coursesData = {
                             <h2>MongoDB là gì?</h2>
                             <p>MongoDB là một cơ sở dữ liệu NoSQL, lưu trữ dữ liệu dưới dạng JSON/BSON thay vì các bảng (table) như MySQL.</p>
                             <p>Nó rất linh hoạt, hiệu năng cao và cực kỳ phù hợp khi kết hợp cùng Node.js.</p>
+                            <p>Cấu trúc trong MongoDB:</p>
+                            <ul>
+                                <li><strong>Database:</strong> Nơi chứa toàn bộ dữ liệu dự án.</li>
+                                <li><strong>Collection:</strong> Tương đương với Table trong SQL (VD: users, posts).</li>
+                                <li><strong>Document:</strong> Tương đương với Row trong SQL. Là một object JSON lưu thông tin cụ thể.</li>
+                            </ul>
                         `
                     },
                     {
@@ -616,8 +705,24 @@ const coursesData = {
                         content: `
                             <h2>Mongoose</h2>
                             <p>Mongoose là một thư viện ODM (Object Data Modeling) cho MongoDB và Node.js. Nó giúp chúng ta định nghĩa schema (cấu trúc dữ liệu) chặt chẽ và tương tác với database dễ dàng qua các object.</p>
-                            <pre><code>const mongoose = require('mongoose');\nmongoose.connect('mongodb://localhost:27017/my_database');</code></pre>
+                            <pre><code>const mongoose = require('mongoose');\nconst Schema = mongoose.Schema;\n\nconst UserSchema = new Schema({\n  name: String,\n  age: Number\n});\n\nconst UserModel = mongoose.model('User', UserSchema);</code></pre>
                         `
+                    },
+                    {
+                        id: 'node-10-2',
+                        title: 'Trắc nghiệm: Collection và Document',
+                        type: 'quiz',
+                        content: '',
+                        quiz: {
+                            question: 'Khái niệm "Collection" trong MongoDB tương đương với khái niệm nào trong Cơ sở dữ liệu quan hệ (SQL)?',
+                            options: [
+                                { id: 'a', text: 'Row (Dòng)' },
+                                { id: 'b', text: 'Table (Bảng)' },
+                                { id: 'c', text: 'Column (Cột)' },
+                                { id: 'd', text: 'Database' }
+                            ],
+                            correctAnswer: 'b'
+                        }
                     }
                 ]
             },

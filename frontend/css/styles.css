@@ -214,16 +214,17 @@ body {
 }
 
 .theory-section pre {
-    background-color: #000;
-    padding: 12px;
-    border-radius: 6px;
     margin-bottom: 16px;
-    overflow-x: auto;
+    border-radius: 6px;
+    overflow: hidden;
 }
 
-.theory-section code {
+.theory-section code:not(.hljs) {
     font-family: monospace;
     color: #a6e22e;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 /* Interactive Section */
@@ -317,6 +318,16 @@ body {
     font-size: 14px;
 }
 
+/* Đồng bộ màu sắc CodeMirror giống với Highlight.js (Base16 Dracula) */
+.cm-s-dracula .cm-keyword { color: #8be9fd !important; } /* let, const, for, if... -> Xanh ngọc */
+.cm-s-dracula .cm-def { color: #ffb86c !important; } /* Tên biến định nghĩa -> Cam */
+.cm-s-dracula .cm-variable { color: #f8f8f2 !important; } /* Biến thông thường -> Trắng */
+.cm-s-dracula .cm-variable-2 { color: #f8f8f2 !important; }
+.cm-s-dracula .cm-property { color: #8be9fd !important; } /* Thuộc tính (vd: .log) -> Xanh ngọc */
+.cm-s-dracula .cm-number { color: #ffb86c !important; } /* Số -> Cam */
+.cm-s-dracula .cm-string { color: #f1fa8c !important; } /* Chuỗi -> Vàng */
+.cm-s-dracula .cm-operator { color: #f8f8f2 !important; } /* Dấu +, -, =, < -> Trắng */
+
 .console-container {
     height: 150px;
     background-color: #000;
@@ -346,6 +357,7 @@ body {
 .console-output .log { color: #fff; }
 .console-output .error { color: #ef4444; }
 .console-output .warn { color: #f59e0b; }
+.console-output .success { color: #10b981; }
 
 /* Quiz Mode */
 #quizMode {
@@ -554,5 +566,259 @@ body {
     
     .logo span {
         display: none;
+    }
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+.modal-content {
+    background-color: var(--sidebar-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.modal-header h3 { margin: 0; color: #fff; }
+.close-btn {
+    background: none; border: none;
+    color: #9ca3af; font-size: 1.2rem;
+    cursor: pointer;
+}
+.close-btn:hover { color: #fff; }
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #d1d5db;
+    font-size: 14px;
+}
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: #fff;
+    font-family: inherit;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.social-auth-separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #6b7280;
+    margin: 20px 0;
+    font-size: 12px;
+}
+.social-auth-separator::before,
+.social-auth-separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #374151;
+}
+.social-auth-separator span {
+    padding: 0 10px;
+}
+
+.social-auth-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.social-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.social-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.social-btn.google:hover { border-color: #ea4335; color: #ea4335; }
+.social-btn.github:hover { border-color: #f0f6fc; color: #f0f6fc; }
+.social-btn.phone:hover { border-color: #3b82f6; color: #3b82f6; }
+
+/* Landing Page Styles */
+.landing-page {
+    /* If used in index.html as an overlay, it uses these absolute/fixed styles */
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: transparent;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.landing-shapes {
+    position: absolute;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.shape {
+    position: absolute;
+    filter: blur(80px);
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.shape-1 {
+    width: 400px; height: 400px;
+    background-color: #f05123;
+    top: -100px; left: -100px;
+}
+
+.shape-2 {
+    width: 300px; height: 300px;
+    background-color: #8b5cf6;
+    bottom: -50px; right: -50px;
+    animation-delay: -5s;
+}
+
+.shape-3 {
+    width: 250px; height: 250px;
+    background-color: #3b82f6;
+    bottom: 50%; left: 50%;
+    transform: translate(-50%, 50%);
+    animation-delay: -2s;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+.landing-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    max-width: 800px;
+    padding: 60px 50px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 24px;
+    box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.landing-title {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #94a3b8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -2px;
+    line-height: 1.1;
+}
+
+.landing-subtitle {
+    font-size: 1.25rem;
+    color: #9ca3af;
+    margin-bottom: 48px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.landing-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.landing-btn {
+    padding: 16px 36px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.landing-btn.btn-primary {
+    background: linear-gradient(135deg, #f05123 0%, #d13d10 100%);
+    color: white;
+    box-shadow: 0 4px 14px 0 rgba(240, 81, 35, 0.39);
+}
+
+.landing-btn.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(240, 81, 35, 0.5);
+    background: linear-gradient(135deg, #ff5e2e 0%, #e64512 100%);
+}
+
+.landing-btn.outline {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    backdrop-filter: blur(10px);
+}
+
+.landing-btn.outline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .landing-title {
+        font-size: 2.5rem;
+    }
+    .landing-actions {
+        flex-direction: column;
+    }
+    .landing-content {
+        padding: 30px 20px;
+        margin: 0 20px;
     }
 }

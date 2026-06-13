@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập / Đăng ký</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
+
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: radial-gradient(circle at 50% -20%, #1f2937, #0b0f19);
+        }
+
+        /* Make modal content act as a standalone box */
+        .login-box {
+            background-color: var(--sidebar-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            width: 100%;
+            max-width: 450px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-btn:hover {
+            color: white;
+        }
+
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="landing.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Quay lại</a>
+
+    <div class="login-box">
+        <div class="modal-header" style="justify-content: center; margin-bottom: 25px;">
+            <h2 id="modalTitle" style="color: #fff; margin: 0; font-weight: 700;">Đăng nhập</h2>
+        </div>
+        <div class="modal-body">
+            <div id="authError"
+                style="color: #ff4d4f; font-size: 13px; margin-bottom: 10px; display: none; text-align: center;"></div>
+
+            <div class="form-group">
+                <label>Tên đăng nhập</label>
+                <input type="text" id="usernameInput" placeholder="Nhập tên đăng nhập...">
+            </div>
+            <div class="form-group">
+                <label>Mật khẩu</label>
+                <input type="password" id="passwordInput" placeholder="Nhập mật khẩu...">
+            </div>
+            <button id="submitAuthBtn" class="btn btn-primary"
+                style="width: 100%; margin-top: 10px; padding: 12px; border-radius: 8px;">Đăng nhập</button>
+
+            <div class="social-auth-separator">
+                <span>Hoặc tiếp tục với</span>
+            </div>
+            <div class="social-auth-buttons">
+                <button id="googleLoginBtn" class="social-btn google"><i class="fa-brands fa-google"></i>
+                    Google</button>
+                <button id="githubLoginBtn" class="social-btn github"><i class="fa-brands fa-github"></i>
+                    GitHub</button>
+                <button id="phoneLoginBtn" class="social-btn phone"><i class="fa-solid fa-phone"></i> SĐT</button>
+            </div>
+
+            <div id="recaptcha-container" style="margin-top: 10px; display: flex; justify-content: center;"></div>
+
+            <div style="text-align: center; margin-top: 25px; font-size: 14px; color: #a0a0a0;">
+                <span id="authToggleText">Bạn chưa có tài khoản? </span>
+                <a href="#" id="toggleAuthMode"
+                    style="color: var(--primary-color); text-decoration: none; font-weight: 600;">Đăng ký ngay</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+
+    <!-- Auth Logic -->
+    <script src="../js/auth.js"></script>
+
+    <script>
+        // Check mode from URL (e.g., ?mode=register)
+        const urlParams = new URLSearchParams(window.location.search);
+        const mode = urlParams.get('mode');
+
+        // Wait for auth.js to load, then setup
+        setTimeout(() => {
+            if (mode === 'register' && typeof isLoginMode !== 'undefined') {
+                isLoginMode = false;
+                if (typeof updateModalUI === 'function') updateModalUI();
+            }
+        }, 100);
+    </script>
+</body>
+
+</html>

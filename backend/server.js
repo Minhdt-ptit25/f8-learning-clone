@@ -1,6 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const coursesData = require('./data');
+const path = require('path');
+const courseRoutes = require('./src/routes/course.routes');
+const authRoutes = require('./src/routes/auth.routes');
+const progressRoutes = require('./src/routes/progress.routes');
+const configRoutes = require('./src/routes/config.routes');
 
 const app = express();
 const PORT = 3000;
@@ -9,33 +14,15 @@ const PORT = 3000;
 app.use(cors()); // Cho phép Frontend gọi API từ port khác
 app.use(express.json());
 
+// Phục vụ giao diện Frontend (file index.html, css, js)
+// Đã cấu trúc lại, frontend nằm ở ../frontend
+app.use(express.static(path.join(__dirname, '../frontend')));
+
 // RESTful APIs
-
-// 1. Lấy danh sách các khóa học (chỉ lấy metadata, không lấy toàn bộ lessons)
-app.get('/api/courses', (req, res) => {
-    const courseList = Object.keys(coursesData).map(key => ({
-        id: key,
-        title: coursesData[key].title
-    }));
-    res.json(courseList);
-});
-
-// 2. Các API lấy dữ liệu chi tiết từng khóa học (chapters, lessons)
-
-// API Khóa học JS Cơ Bản
-app.get('/api/courses/js-basic', (req, res) => {
-    res.json(coursesData['js-basic']);
-});
-
-// API Khóa học JS Nâng Cao
-app.get('/api/courses/js-advanced', (req, res) => {
-    res.json(coursesData['js-advanced']);
-});
-
-// API Khóa học NodeJS
-app.get('/api/courses/nodejs', (req, res) => {
-    res.json(coursesData['nodejs']);
-});
+app.use('/api/courses', courseRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/config', configRoutes);
 
 // Khởi chạy server
 app.listen(PORT, () => {

@@ -562,7 +562,7 @@ app.use(cors(corsOptions));</code></pre>
 
 // 2. Nội dung file .env (Không có dấu nháy, không có dấu phẩy)
 PORT=8000
-MONGO_URI=mongodb+srv://admin:matkhau123@cluster0.mongodb.net/f8
+MONGO_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/f8
 JWT_SECRET=mot_chuoi_cuc_ky_bi_mat_va_kho_doan
 
 // 3. Import trong file index.js (Phải để ở đầu file)
